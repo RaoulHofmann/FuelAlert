@@ -6,7 +6,12 @@ kernel:
     resource: ../src/Kernel.php
     type: annotation
 
-fuel_rss:
+api_get_rss_data:
     path: /api/v1/rss
-    controller: App\Controller\FuelRssController::getAllData
+    controller: App\Controller\RssDataController::getAllData
+    methods: GET
+
+api_show_regions:
+    path: /api/v1/regions
+    controller: App\Controller\EnumDataController::getAllRegions
     methods: GET

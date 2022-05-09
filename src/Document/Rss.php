@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Document;
 
 use App\Document\Channel;
 
@@ -15,5 +15,7 @@ class Rss
 
     public function setChannel($channel) {
         $this->channel = $channel;
+
+        return $this;
     }
 }

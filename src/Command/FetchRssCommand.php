@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Model\Rss;
+use App\Document\Rss;
 use App\Service\ControllerManagerService;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
@@ -55,6 +55,7 @@ class FetchRssCommand extends Command
         
         $this->documentManager->persist($xmlObject->getChannel());
         $this->documentManager->flush();
+        $this->documentManager->clear();
 
         $io->success(sprintf('Fetched "%d" data items from fuelwatch.', count($xmlObject->getChannel()->getItem())));
 

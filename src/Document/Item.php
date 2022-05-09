@@ -28,14 +28,29 @@ class Item
     private $date;
 
     /**
-     * @ODM\Field(type="date")
+     * @ODM\Field(type="float")
      */
-    private $lastUpdated;
+    private $price;
+
+    /**
+     * @ODM\Field(type="string")
+     */
+    private $tradingName;
+
+    /**
+     * @ODM\Field(type="string")
+     */
+    private $location;
 
     /**
      * @ODM\Field(type="string")
      */
     private $address;
+
+    /**
+     * @ODM\Field(type="string")
+     */
+    private $phone;
 
     /**
      * @ODM\Field(type="float")
@@ -48,31 +63,27 @@ class Item
     private $longitude;
 
     /**
-     * @ODM\Field(type="float")
+     * @ODM\Field(type="string")
      */
-    private $price;
+    private $siteFeatures;
 
-    public function getTitle(): string {
+    public function getTitle(): string
+    {
         return $this->title;
     }
-    
-    public function setTitle($title) {
+
+    public function setTitle($title)
+    {
         $this->title = $title;
+
+        return $this;
     }
 
-    /**
-     * Get the value of longitude
-     */ 
     public function getLongitude()
     {
         return $this->longitude;
     }
 
-    /**
-     * Set the value of longitude
-     *
-     * @return  self
-     */ 
     public function setLongitude($longitude)
     {
         $this->longitude = $longitude;
@@ -80,19 +91,11 @@ class Item
         return $this;
     }
 
-    /**
-     * Get the value of price
-     */ 
     public function getPrice()
     {
         return $this->price;
     }
 
-    /**
-     * Set the value of price
-     *
-     * @return  self
-     */ 
     public function setPrice($price)
     {
         $this->price = $price;
@@ -100,19 +103,11 @@ class Item
         return $this;
     }
 
-    /**
-     * Get the value of latitude
-     */ 
     public function getLatitude()
     {
         return $this->latitude;
     }
 
-    /**
-     * Set the value of latitude
-     *
-     * @return  self
-     */ 
     public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
@@ -120,19 +115,11 @@ class Item
         return $this;
     }
 
-    /**
-     * Get the value of address
-     */ 
     public function getAddress()
     {
         return $this->address;
     }
 
-    /**
-     * Set the value of address
-     *
-     * @return  self
-     */ 
     public function setAddress($address)
     {
         $this->address = $address;
@@ -140,39 +127,11 @@ class Item
         return $this;
     }
 
-    /**
-     * Get the value of lastUpdated
-     */ 
-    public function getLastUpdated()
-    {
-        return $this->lastUpdated;
-    }
-
-    /**
-     * Set the value of lastUpdated
-     *
-     * @return  self
-     */ 
-    public function setLastUpdated($lastUpdated)
-    {
-        $this->lastUpdated = $lastUpdated;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of date
-     */ 
     public function getDate()
     {
         return $this->date;
     }
 
-    /**
-     * Set the value of date
-     *
-     * @return  self
-     */ 
     public function setDate($date)
     {
         $this->date = $date;
@@ -180,22 +139,62 @@ class Item
         return $this;
     }
 
-    /**
-     * Get the value of brand
-     */ 
     public function getBrand()
     {
         return $this->brand;
     }
 
-    /**
-     * Set the value of brand
-     *
-     * @return  self
-     */ 
     public function setBrand($brand)
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+ 
+    public function getTradingName()
+    {
+        return $this->tradingName;
+    }
+
+    public function setTradingName($tradingName)
+    {
+        $this->tradingName = $tradingName;
+
+        return $this;
+    }
+
+    public function getSiteFeatures()
+    {
+        return $this->siteFeatures;
+    }
+
+    public function setSiteFeatures($siteFeatures)
+    {
+        $this->siteFeatures = $siteFeatures;
 
         return $this;
     }
