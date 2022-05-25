@@ -1,0 +1,9 @@
+type Enum {
+    product(value: Int!): Product
+    products: [Product!]!
+}
+
+type Product {
+    name: String
+    value: Int
+}

@@ -2,8 +2,8 @@
 
 namespace App\Command;
 
-use App\Document\Rss;
-use App\Service\ControllerManagerService;
+use App\Model\Rss;
+use App\Service\ControllerService;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 use Symfony\Component\Console\Command\Command;
@@ -15,9 +15,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class FetchRssCommand extends Command
 {
     /**
-     * @var ControllerManagerService
+     * @var ControllerService
      */
-    private $controllerManagerService;
+    private $controllerService;
     
     /**
      * @var DocumentManager
@@ -28,9 +28,9 @@ class FetchRssCommand extends Command
 
     protected static $defaultName = 'app:rss:fetch';
 
-    public function __construct(ControllerManagerService $controllerManagerService, DocumentManager $documentManager)
+    public function __construct(ControllerService $controllerService, DocumentManager $documentManager)
     {
-        $this->controllerManagerService = $controllerManagerService;
+        $this->controllerService = $controllerService;
         $this->documentManager = $documentManager;
 
         parent::__construct();
@@ -51,7 +51,7 @@ class FetchRssCommand extends Command
         $content = file_get_contents(self::RSS_URL);
         $xml = simplexml_load_string($content);
      
-        $xmlObject = $this->controllerManagerService->deserialize($xml->asXML(), new Rss, "xml");
+        $xmlObject = $this->controllerService->deserialize($xml->asXML(), new Rss, "xml");
         
         $this->documentManager->persist($xmlObject->getChannel());
         $this->documentManager->flush();
