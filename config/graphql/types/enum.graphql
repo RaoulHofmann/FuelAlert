@@ -1,9 +1,13 @@
 type Enum {
-    product(value: Int!): Product
-    products: [Product!]!
+    productByValue(value: Int!): BaseEnum
+    productByName(name: String!): BaseEnum
+    products: [BaseEnum!]!
+    regionCodeByValue(value: Int!): BaseEnum
+    regionCodeByName(name: String!): BaseEnum
+    regionCodes: [BaseEnum!]!
 }
 
-type Product {
+type BaseEnum {
     name: String
     value: Int
 }
