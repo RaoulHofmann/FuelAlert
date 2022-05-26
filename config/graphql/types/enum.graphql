@@ -1,13 +1,19 @@
 type Enum {
+    all: BaseEnumCollection!
     productByValue(value: Int!): BaseEnum
     productByName(name: String!): BaseEnum
-    products: [BaseEnum!]!
+    products: [BaseEnum]!
     regionCodeByValue(value: Int!): BaseEnum
     regionCodeByName(name: String!): BaseEnum
-    regionCodes: [BaseEnum!]!
+    regionCodes: [BaseEnum]!
 }
 
 type BaseEnum {
     name: String
     value: Int
+}
+
+type BaseEnumCollection {
+    products: [BaseEnum]
+    regionCodes: [BaseEnum]
 }

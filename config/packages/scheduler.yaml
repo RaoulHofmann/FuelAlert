@@ -1,0 +1,3 @@
+scheduler_bundle:
+    transport:
+        dsn: 'filesystem://first_in_first_out'

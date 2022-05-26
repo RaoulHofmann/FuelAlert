@@ -1,0 +1,4 @@
+api_send_email:
+    path: /api/v1/email
+    controller: App\Controller\MailerController::sendEmail
+    methods: POST

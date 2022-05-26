@@ -20,13 +20,3 @@ api_get_rss_data_by_region:
     path: /api/v1/rss/region/{region}
     controller: App\Controller\RssDataController::getItemsByRegion
     methods: GET
-
-api_show_regions:
-    path: /api/v1/regions
-    controller: App\Controller\EnumDataController::getAllRegions
-    methods: GET
-
-api_show_products:
-    path: /api/v1/products
-    controller: App\Controller\EnumDataController::getAllProducts
-    methods: GET

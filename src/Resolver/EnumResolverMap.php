@@ -2,9 +2,6 @@
 
 namespace App\Resolver;
 
-use GraphQL\Error\Error;
-use GraphQL\Language\AST\StringValueNode;
-use GraphQL\Type\Definition\ResolveInfo;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Resolver\ResolverMap;
 
@@ -13,31 +10,34 @@ use App\Enum\RegionCode;
 
 class EnumResolverMap extends ResolverMap
 {
-    protected function map()
+    protected function map(): mixed
     {
         return [
             "Enum" =>
             [
-                "productByValue" => function ($value, Argument $args) {
+                "all" => function () {
+                    return ["products" => Product::cases(), "regionCodes" => RegionCode::cases()];
+                },
+                "productByValue" => function (Argument $args) {
                     return Product::tryFrom($args["value"]);
                 },
-                "productByName" => function ($value, Argument $args) {
+                "productByName" => function (Argument $args) {
                     $products = Product::cases();
                     $key = array_search($args["name"], array_column($products, 'name'));
                     return $products[$key];
                 },
-                "products" => function ($value, Argument $args) {
+                "products" => function () {
                     return Product::cases();
                 },
-                "regionCodeByValue" => function ($value, Argument $args) {
+                "regionCodeByValue" => function (Argument $args) {
                     return RegionCode::tryFrom($args["value"]);
                 },
-                "regionCodeByName" => function ($value, Argument $args) {
+                "regionCodeByName" => function (Argument $args) {
                     $codes = RegionCode::cases();
                     $key = array_search($args["name"], array_column($codes, 'name'));
                     return $codes[$key];
                 },
-                "regionCodes" => function ($value, Argument $args) {
+                "regionCodes" => function () {
                     return RegionCode::cases();
                 }
             ]
