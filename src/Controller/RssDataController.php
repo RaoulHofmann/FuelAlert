@@ -2,51 +2,23 @@
 
 namespace App\Controller;
 
-use App\Document\Channel;
+use App\Model\Rss;
 use App\Service\ControllerService;
-use Doctrine\ODM\MongoDB\DocumentManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-use App\Enum\RegionCode;
-
 class RssDataController extends AbstractController
 {
-    public function getAllData(ControllerService $controllerService, DocumentManager $dm): Response
+    private const RSS_URL = "https://www.fuelwatch.wa.gov.au/fuelwatch/fuelWatchRSS";
+
+
+    public function getAllData(ControllerService $controllerService): Response
     {
-        $repository = $dm->getRepository(Channel::class);
-        $items = $repository->findAll();
+        $content = file_get_contents(self::RSS_URL);
+        $xml = simplexml_load_string($content);
+     
+        $xmlObject = $controllerService->deserialize($xml->asXML(), new Rss, "xml");
 
-        return new Response(
-            $controllerService->serialize($items, "json"),
-            Response::HTTP_OK,
-            ['content-type' => 'text/json']
-        );
-    }
-
-    public function getLatestData(ControllerService $controllerService, DocumentManager $dm): Response
-    {
-        $repository = $dm->getRepository(Channel::class);
-        $items = null;
-
-        return new Response(
-            $controllerService->serialize($items, "json"),
-            Response::HTTP_OK,
-            ['content-type' => 'text/json']
-        );
-    }
-
-    public function getItemsByRegion($region, ControllerService $controllerService, DocumentManager $dm): Response
-    {
-        $regionCode = RegionCode::tryFrom($region);
-
-        if ($regionCode == null) {
-            return $controllerService->baseResponse("{ \"message\": \"Could not find region with that code\" }", null, Response::HTTP_I_AM_A_TEAPOT);
-        }
-
-        $repository = $dm->getRepository(Channel::class);
-        $items = null;
-
-        return $controllerService->baseResponse($items);
+        return $controllerService->baseResponse($xmlObject->getChannel());
     }
 }

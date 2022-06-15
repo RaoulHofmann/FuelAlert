@@ -11,12 +11,5 @@ api_get_rss_data:
     controller: App\Controller\RssDataController::getAllData
     methods: GET
 
-api_get_latest_rss_data:
-    path: /api/v1/rss/latest
-    controller: App\Controller\RssDataController::getLatestData
-    methods: GET
-
-api_get_rss_data_by_region:
-    path: /api/v1/rss/region/{region}
-    controller: App\Controller\RssDataController::getItemsByRegion
-    methods: GET
+api_login_check:
+    path: /api/login_check

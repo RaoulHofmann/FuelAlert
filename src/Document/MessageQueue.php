@@ -4,7 +4,7 @@ namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
-/** @ODM\Document(db="messages", collection="rssData", repositoryClass="Repository\ChannelRepository") */
+/** @ODM\Document(db="messages", collection="rssData", repositoryClass="Repository\MessageRepository") */
 class MessageQueue
 {
     /**

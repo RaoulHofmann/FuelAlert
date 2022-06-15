@@ -23,15 +23,15 @@ class ControllerService {
         $this->serializer = new Serializer($normalizers, $encoders); 
     }
 
-    public function deserialize($data, $class, $type) {
+    public function deserialize($data, $class, $type = "json") {
         return $this->serializer->deserialize($data, get_class($class), $type);
     }
 
-    public function serialize($data, $type) {
+    public function serialize($data, $type = "json") {
         return $this->serializer->serialize($data,$type);
     }
 
-    public function baseResponse($data, $type = "json", $responseType = Response::HTTP_OK, $contentType = "text/json"): Response
+    public function baseResponse($data, $type = "json", $responseType = Response::HTTP_OK, $contentType = "application/json"): Response
     {
         return new Response(
             ($type !== null ? $this->serialize($data, $type) : $data),
