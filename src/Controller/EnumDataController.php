@@ -13,11 +13,11 @@ class EnumDataController extends AbstractController
 {
     public function getAllRegions(ControllerService $controllerService): Response
     {       
-        return $controllerService->baseResponse($controllerService->serialize(RegionCode::cases()));
+        return $controllerService->baseResponse(RegionCode::cases());
     }
 
     public function getAllProducts(ControllerService $controllerService): Response 
     {       
-        return $controllerService->baseResponse($controllerService->serialize(Product::cases()));
+        return $controllerService->baseResponse(Product::cases());
     }
 }

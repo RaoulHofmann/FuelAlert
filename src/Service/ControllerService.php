@@ -16,19 +16,27 @@ use Symfony\Component\HttpFoundation\Response;
 class ControllerService {
     private $serializer;
 
-    public function __construct() {
+    public function __construct()
+    {
         $encoders = [new XmlEncoder(), new JsonEncoder()];
         $extractor = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
         $normalizers = [new ObjectNormalizer(null, null, null, $extractor), new GetSetMethodNormalizer(), new ArrayDenormalizer()];
         $this->serializer = new Serializer($normalizers, $encoders); 
     }
 
-    public function deserialize($data, $class, $type = "json") {
+    public function deserialize($data, $class, $type = "json")
+    {
         return $this->serializer->deserialize($data, get_class($class), $type);
     }
 
-    public function serialize($data, $type = "json") {
+    public function serialize($data, $type = "json")
+    {
         return $this->serializer->serialize($data,$type);
+    }
+
+    public function getSerializer()
+    {
+        return $this->serializer;
     }
 
     public function baseResponse($data, $type = "json", $responseType = Response::HTTP_OK, $contentType = "application/json"): Response
@@ -38,10 +46,5 @@ class ControllerService {
             $responseType,
             ["content-type" => $contentType]
         );
-    }
-
-    public function getSerializer()
-    {
-        return $this->serializer;
     }
 }

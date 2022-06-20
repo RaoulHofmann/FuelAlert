@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
@@ -40,12 +41,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getemail()
+    public function getEmail()
     {
         return $this->email;
     }
 
-    public function setemail($email)
+    public function setEmail($email)
     {
         $this->email = $email;
 
@@ -72,8 +73,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        print_r($this->email." ");
-
         return (string) $this->email;
     }
 
@@ -92,7 +91,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
