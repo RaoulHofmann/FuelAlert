@@ -7,9 +7,14 @@ kernel:
     type: annotation
 
 api_get_rss_data:
-    path: /api/v1/rss
-    controller: App\Controller\RssDataController::getAllData
+    path: /api/v1/rss/default
+    controller: App\Controller\RssDataController::getDefaultData
     methods: GET
 
 api_login_check:
-    path: /api/login_check
+    path: /api/auth
+
+api_register:
+    path: /api/v1/register
+    controller: App\Controller\AuthController::register
+    methods: Post

@@ -11,11 +11,11 @@ security:
                 property: email
     firewalls:
         login:
-            pattern: ^/api/login
+            pattern: ^/api/auth
             stateless: true
             provider: mongo_provider
             json_login:
-                check_path: /api/login_check
+                check_path: /api/auth
                 username_path: email
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
@@ -33,7 +33,7 @@ security:
             lazy: true
 
     access_control:
-        - { path: ^/graphiql, roles: PUBLIC_ACCESS }
-        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        - { path: ^/graphiql, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/auth, roles: PUBLIC_ACCESS }
         - { path: ^/api/doc, roles: PUBLIC_ACCESS }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
