@@ -11,7 +11,6 @@ class RssDataController extends AbstractController
 {
     private const RSS_URL = "https://www.fuelwatch.wa.gov.au/fuelwatch/fuelWatchRSS";
 
-
     public function getDefaultData(ControllerService $controllerService): Response
     {
         $content = file_get_contents(self::RSS_URL);
